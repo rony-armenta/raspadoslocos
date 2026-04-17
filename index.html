@@ -433,6 +433,244 @@
       line-height: 1.6;
     }
 
+    /* ══════════════ CARRITO DE COMPRAS ══════════════ */
+    .cart-btn {
+      position: relative;
+      background: none;
+      border: 2px solid var(--neon-cyan);
+      border-radius: 50px;
+      color: var(--neon-cyan);
+      font-size: 1.3rem;
+      padding: .3rem .9rem;
+      cursor: pointer;
+      transition: background .2s, box-shadow .2s;
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      white-space: nowrap;
+    }
+    .cart-btn:hover {
+      background: rgba(0,240,255,.1);
+      box-shadow: 0 0 14px rgba(0,240,255,.3);
+    }
+    .cart-count {
+      background: var(--neon-pink);
+      color: #fff;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 900;
+      font-size: .72rem;
+      min-width: 20px;
+      height: 20px;
+      border-radius: 50px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 5px;
+      box-shadow: 0 0 8px var(--neon-pink);
+      transition: transform .2s;
+    }
+    .cart-count.pop { transform: scale(1.4); }
+
+    /* Panel del carrito */
+    .cart-panel {
+      position: fixed;
+      top: 0; right: -360px;
+      width: 340px;
+      height: 100vh;
+      background: #0f0f22;
+      border-left: 2px solid var(--neon-cyan);
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      transition: right .35s cubic-bezier(.4,0,.2,1);
+      box-shadow: -8px 0 40px rgba(0,0,0,.5);
+    }
+    .cart-panel.open { right: 0; }
+
+    .cart-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.55);
+      z-index: 998;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .35s;
+    }
+    .cart-overlay.open { opacity: 1; pointer-events: all; }
+
+    .cart-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 1.4rem;
+      border-bottom: 1px solid rgba(0,240,255,.15);
+    }
+    .cart-header h3 {
+      font-family: 'Boogaloo', cursive;
+      font-size: 1.6rem;
+      color: var(--neon-cyan);
+    }
+    .cart-close {
+      background: none;
+      border: none;
+      color: rgba(240,240,255,.6);
+      font-size: 1.5rem;
+      cursor: pointer;
+      line-height: 1;
+      transition: color .2s;
+    }
+    .cart-close:hover { color: var(--neon-pink); }
+
+    .cart-items {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1rem 1.4rem;
+      display: flex;
+      flex-direction: column;
+      gap: .8rem;
+    }
+    .cart-items::-webkit-scrollbar { width: 4px; }
+    .cart-items::-webkit-scrollbar-thumb { background: var(--neon-cyan); border-radius: 4px; }
+
+    .cart-empty {
+      text-align: center;
+      color: rgba(240,240,255,.35);
+      margin-top: 3rem;
+      font-size: 1rem;
+    }
+    .cart-empty span { font-size: 3rem; display: block; margin-bottom: .5rem; }
+
+    .cart-item {
+      display: flex;
+      align-items: center;
+      gap: .8rem;
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: .7rem 1rem;
+      border: 1px solid rgba(255,255,255,.06);
+      animation: slideIn .25s ease both;
+    }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(20px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    .cart-item-emoji { font-size: 2rem; line-height: 1; }
+    .cart-item-info { flex: 1; }
+    .cart-item-name {
+      font-weight: 700;
+      font-size: .95rem;
+      color: var(--text-light);
+    }
+    .cart-item-price {
+      font-size: .82rem;
+      color: rgba(240,240,255,.5);
+    }
+    .cart-item-controls {
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+    }
+    .qty-btn {
+      background: rgba(255,255,255,.08);
+      border: none;
+      color: var(--text-light);
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .15s;
+      line-height: 1;
+    }
+    .qty-btn:hover { background: var(--neon-pink); }
+    .qty-num {
+      font-weight: 900;
+      font-size: .95rem;
+      min-width: 18px;
+      text-align: center;
+    }
+
+    .cart-footer {
+      padding: 1.2rem 1.4rem;
+      border-top: 1px solid rgba(0,240,255,.15);
+    }
+    .cart-total-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    .cart-total-label {
+      font-size: 1rem;
+      color: rgba(240,240,255,.6);
+      font-weight: 700;
+    }
+    .cart-total-amount {
+      font-family: 'Boogaloo', cursive;
+      font-size: 2rem;
+      color: var(--neon-yellow);
+      text-shadow: 0 0 10px rgba(255,230,0,.4);
+    }
+    .btn-checkout {
+      width: 100%;
+      background: var(--neon-pink);
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      font-family: 'Boogaloo', cursive;
+      font-size: 1.25rem;
+      padding: .7rem;
+      cursor: pointer;
+      box-shadow: 0 0 16px rgba(255,45,120,.4);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .btn-checkout:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 28px rgba(255,45,120,.6);
+    }
+    .btn-clear {
+      width: 100%;
+      background: transparent;
+      color: rgba(240,240,255,.35);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 50px;
+      font-size: .85rem;
+      padding: .4rem;
+      cursor: pointer;
+      margin-top: .5rem;
+      transition: color .2s, border-color .2s;
+    }
+    .btn-clear:hover { color: var(--neon-pink); border-color: var(--neon-pink); }
+
+    /* Toast de confirmación */
+    .toast-confirm {
+      position: fixed;
+      bottom: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: #1a1a35;
+      border: 1px solid var(--neon-green);
+      color: var(--neon-green);
+      font-weight: 700;
+      padding: .7rem 1.6rem;
+      border-radius: 50px;
+      z-index: 1100;
+      font-size: .95rem;
+      box-shadow: 0 0 20px rgba(57,255,20,.25);
+      transition: transform .3s ease, opacity .3s ease;
+      opacity: 0;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+    .toast-confirm.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    @media (max-width: 575px) {
+      .cart-panel { width: 100%; right: -100%; }
+    }
+
     /* ══════════════ SCROLL REVEAL ══════════════ */
     .reveal {
       opacity: 0;
@@ -501,11 +739,16 @@
         <span class="navbar-toggler-icon" style="filter:invert(1)"></span>
       </button>
       <div class="collapse navbar-collapse" id="navMenu">
-        <ul class="navbar-nav ms-auto gap-2">
+        <ul class="navbar-nav ms-auto gap-2 align-items-lg-center">
           <li class="nav-item"><a class="nav-link" href="#nosotros">Nosotros</a></li>
           <li class="nav-item"><a class="nav-link" href="#eslogan">Eslogan</a></li>
           <li class="nav-item"><a class="nav-link" href="#productos">Productos</a></li>
           <li class="nav-item"><a class="nav-link" href="#equipo">Equipo</a></li>
+          <li class="nav-item ms-lg-2">
+            <button class="cart-btn" id="cartToggle">
+              🛒 <span id="cartCount" class="cart-count">0</span>
+            </button>
+          </li>
         </ul>
       </div>
     </div>
@@ -588,7 +831,7 @@
                 chile piquín y una lluvia de chispas de tamarindo. Dulce, ácido y adictivo. 🌶️
               </p>
               <div class="product-price">$35 MXN</div>
-              <button class="btn-order pink">¡Lo quiero!</button>
+              <button class="btn-order pink" data-name="El Más Fresa" data-price="35" data-emoji="🍓">¡Lo quiero!</button>
             </div>
           </div>
         </div>
@@ -607,7 +850,7 @@
                 Limón, tamarindo y mango bailando juntos sobre hielo bien raspado. 🤪
               </p>
               <div class="product-price">$40 MXN</div>
-              <button class="btn-order cyan">¡Lo quiero!</button>
+              <button class="btn-order cyan" data-name="Raspado Loco" data-price="40" data-emoji="🍧">¡Lo quiero!</button>
             </div>
           </div>
         </div>
@@ -626,7 +869,7 @@
                 Un mambo de sabores que te hará bailar desde el primer mordisco. 💃
               </p>
               <div class="product-price">$45 MXN</div>
-              <button class="btn-order green">¡Lo quiero!</button>
+              <button class="btn-order green" data-name="MangoMambo" data-price="45" data-emoji="🥭">¡Lo quiero!</button>
             </div>
           </div>
         </div>
@@ -695,6 +938,34 @@
     </div>
   </section>
 
+  <!-- ── OVERLAY CARRITO ── -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+
+  <!-- ── PANEL CARRITO ── -->
+  <aside class="cart-panel" id="cartPanel">
+    <div class="cart-header">
+      <h3>🛒 Tu pedido</h3>
+      <button class="cart-close" id="cartClose">✕</button>
+    </div>
+    <div class="cart-items" id="cartItems">
+      <div class="cart-empty">
+        <span>🍧</span>
+        ¡Tu carrito está vacío!<br>Agrega un raspado 👆
+      </div>
+    </div>
+    <div class="cart-footer">
+      <div class="cart-total-row">
+        <span class="cart-total-label">Total:</span>
+        <span class="cart-total-amount" id="cartTotal">$0 MXN</span>
+      </div>
+      <button class="btn-checkout" id="btnCheckout">¡Ordenar ahora! 🎉</button>
+      <button class="btn-clear" id="btnClear">Vaciar carrito</button>
+    </div>
+  </aside>
+
+  <!-- ── TOAST ── -->
+  <div class="toast-confirm" id="toast"></div>
+
   <!-- ── FOOTER ── -->
   <footer>
     <p>© 2026 <span>Raspados Locos</span> — Todos los derechos reservados 🍧</p>
@@ -703,7 +974,118 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    // Scroll reveal
+    // ══ CARRITO DE COMPRAS ══
+    const cart = {};  // { name: { emoji, price, qty } }
+
+    const cartPanel   = document.getElementById('cartPanel');
+    const cartOverlay = document.getElementById('cartOverlay');
+    const cartItems   = document.getElementById('cartItems');
+    const cartCount   = document.getElementById('cartCount');
+    const cartTotal   = document.getElementById('cartTotal');
+    const toast       = document.getElementById('toast');
+
+    function openCart()  { cartPanel.classList.add('open'); cartOverlay.classList.add('open'); }
+    function closeCart() { cartPanel.classList.remove('open'); cartOverlay.classList.remove('open'); }
+
+    document.getElementById('cartToggle').addEventListener('click', openCart);
+    document.getElementById('cartClose').addEventListener('click', closeCart);
+    document.getElementById('cartOverlay').addEventListener('click', closeCart);
+
+    function showToast(msg) {
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2200);
+    }
+
+    function popCount() {
+      cartCount.classList.add('pop');
+      setTimeout(() => cartCount.classList.remove('pop'), 200);
+    }
+
+    function renderCart() {
+      const keys = Object.keys(cart);
+      let total = 0, count = 0;
+
+      if (keys.length === 0) {
+        cartItems.innerHTML = `
+          <div class="cart-empty">
+            <span>🍧</span>
+            ¡Tu carrito está vacío!<br>Agrega un raspado 👆
+          </div>`;
+      } else {
+        cartItems.innerHTML = keys.map(name => {
+          const item = cart[name];
+          total += item.price * item.qty;
+          count += item.qty;
+          return `
+            <div class="cart-item">
+              <span class="cart-item-emoji">${item.emoji}</span>
+              <div class="cart-item-info">
+                <div class="cart-item-name">${name}</div>
+                <div class="cart-item-price">$${item.price} MXN c/u · Subtotal: $${item.price * item.qty}</div>
+              </div>
+              <div class="cart-item-controls">
+                <button class="qty-btn" data-action="minus" data-name="${name}">−</button>
+                <span class="qty-num">${item.qty}</span>
+                <button class="qty-btn" data-action="plus" data-name="${name}">+</button>
+              </div>
+            </div>`;
+        }).join('');
+
+        // Listeners de +/-
+        cartItems.querySelectorAll('.qty-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const n = btn.dataset.name;
+            if (btn.dataset.action === 'plus') {
+              cart[n].qty++;
+            } else {
+              cart[n].qty--;
+              if (cart[n].qty <= 0) delete cart[n];
+            }
+            renderCart();
+          });
+        });
+      }
+
+      cartCount.textContent = count;
+      cartTotal.textContent = `$${total} MXN`;
+      popCount();
+    }
+
+    // Botones "¡Lo quiero!"
+    document.querySelectorAll('.btn-order').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const name  = btn.dataset.name;
+        const price = parseInt(btn.dataset.price);
+        const emoji = btn.dataset.emoji;
+
+        if (cart[name]) {
+          cart[name].qty++;
+        } else {
+          cart[name] = { emoji, price, qty: 1 };
+        }
+
+        renderCart();
+        showToast(`${emoji} ${name} agregado al carrito`);
+        openCart();
+      });
+    });
+
+    // Ordenar
+    document.getElementById('btnCheckout').addEventListener('click', () => {
+      if (Object.keys(cart).length === 0) return showToast('⚠️ Agrega algo primero');
+      showToast('🎉 ¡Pedido realizado! Gracias por tu compra');
+      Object.keys(cart).forEach(k => delete cart[k]);
+      renderCart();
+      setTimeout(closeCart, 800);
+    });
+
+    // Vaciar
+    document.getElementById('btnClear').addEventListener('click', () => {
+      Object.keys(cart).forEach(k => delete cart[k]);
+      renderCart();
+      showToast('🗑️ Carrito vaciado');
+    });
     const revealEls = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry, i) => {
