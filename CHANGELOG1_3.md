@@ -5,20 +5,6 @@ Repositorio: `raspadoslocos`
 
 ---
 
-## [v1.4.0] — 2026-04-17
-
-### 🔒 Seguridad
-- Agregado **Subresource Integrity (SRI)** a los recursos externos de Bootstrap:
-  - `bootstrap.min.css` — atributos `integrity` y `crossorigin` agregados
-  - `bootstrap.bundle.min.js` — atributos `integrity` y `crossorigin` agregados
-- Los hashes SHA-384 corresponden a la versión oficial **Bootstrap 5.3.3**
-- El navegador ahora rechaza automáticamente el recurso si el archivo fue manipulado en el CDN
-
-> 💡 **Nota:** Google Fonts no soporta SRI, pero es un servicio de muy bajo riesgo. Las cabeceras
-> Content Security Policy (CSP) no son configurables en GitHub Pages, por lo que quedan fuera del alcance del proyecto.
-
----
-
 ## [v1.3.0] — 2026-04-17
 
 ### ✨ Agregado
